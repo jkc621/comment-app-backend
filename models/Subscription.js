@@ -9,7 +9,7 @@ var Subscription = sequelize.define('Subscription', {
         type: Sequelize.STRING(15)
     }
     site_id: {
-        allowNull: false,,
+        allowNull: false,
         primaryKey: true,
         references: {
             model: Site,
