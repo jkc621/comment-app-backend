@@ -1,20 +1,20 @@
-var User = sequelize.define('User', {
-    user_id: {
-        allowNull: false,
-        primaryKey: true,
-        references: {
-            model: Profile,
-            key: "user_id"
+module.exports = function(sequelize, Datatypes){
+    var User = sequelize.define('User', {
+        user_id: {
+            allowNull: false,
+            primaryKey: true,
+            type: Datatypes.STRING(15)
         },
-        type: Sequelize.STRING(15)
-    },
-    email: {
-        type: Sequelize.STRING,
-        validate: {
-            isEmail: true
+        email: {
+            type: Datatypes.STRING,
+            validate: {
+                isEmail: true
+            }
         }
-    }
-}, {
-    timestamps: true,
-    underscored: true
-})
+    }, {
+        timestamps: true,
+        underscored: true
+    });
+
+    return User;
+}

@@ -1,53 +1,45 @@
-var Comment = sequelize.define('Page', {
-    comment_id: {
-        allowNull: false,
-        defaultValue: Sequelize.UUIDV1,
-        primaryKey: true,
-        type: Sequelize.UUID,
-        validate: {
-            isUUID: 1
-        }
-    },
-    parent_comment_id: {
-        allowNull: true,
-        defaultValue: null,
-        references: {
-            model: Comment,
-            key: "comment_id"
+module.exports = function(sequelize, Datatypes){
+    var Comment = sequelize.define('Comment', {
+        comment_id: {
+            allowNull: false,
+            defaultValue: sequelize.UUIDV1,
+            primaryKey: true,
+            type: Datatypes.UUID,
+            validate: {
+                isUUID: 1
+            }
         },
-        type: Sequelize.UUID,
-        validate:{
-            isUUID: 1
-        }
-    },
-    comment_text: {
-        allowNull: false,
-        type: Sequelize.TEXT,
-        validate: {
-            notNull: true,
-            notEmpty: true
-        }
-    },
-    page_url: {
-        allowNull: false,
-        references: {
-            model: Page,
-            key: "url"
+        parent_comment_id: {
+            allowNull: true,
+            defaultValue: null,
+            type: Datatypes.UUID,
+            validate:{
+                isUUID: 1
+            }
         },
-        type: Sequelize.STRING,
-        validate: {
-            isUrl: true
-        }
-    },
-    creator_id: {
-        allowNull: false,
-        references: {
-            model: Profile,
-            key: "user_id"
+        comment_text: {
+            allowNull: false,
+            type: Datatypes.TEXT,
+            validate: {
+                notNull: true,
+                notEmpty: true
+            }
         },
-        type: Sequelize.STRING(15)
-    }
-}, {
-    timestamps: true,
-    underscored: true
-})
+        page_url: {
+            allowNull: false,
+            type: Datatypes.STRING,
+            validate: {
+                isUrl: true
+            }
+        },
+        creator_id: {
+            allowNull: false,
+            type: Datatypes.STRING(15)
+        }
+    }, {
+        timestamps: true,
+        underscored: true
+    });
+
+    return Comment;
+}

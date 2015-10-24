@@ -1,29 +1,29 @@
-var Site = sequelize.define('Site', {
-    site_id: {
-        allowNull: false,
-        defaultValue: Sequelize.UUIDV1,
-        primaryKey: true,
-        references: {
-            model: Subscription,
-            key: "site_id"
+module.exports = function(sequelize, Datatypes){
+    var Site = sequelize.define('Site', {
+        site_id: {
+            allowNull: false,
+            defaultValue: sequelize.UUIDV1,
+            primaryKey: true,
+            type: Datatypes.UUID
         },
-        type: Sequelize.UUID
-    },
-    name: {
-        allowNull: false,
-        type: Sequelize.STRING
-    },
-    url: {
-        allowNull: false,
-        type: Sequelize.STRING,
-        validate: {
-            isUrl: true
+        name: {
+            allowNull: false,
+            type: Datatypes.STRING
+        },
+        url: {
+            allowNull: false,
+            type: Datatypes.STRING,
+            validate: {
+                isUrl: true
+            }
+        },
+        description: {
+            type: Datatypes.STRING
         }
-    },
-    description: {
-        type: Sequelize.STRING
-    }
-}, {
-    timestamps: true,
-    underscored: true
-})
+    }, {
+        timestamps: true,
+        underscored: true
+    });
+
+    return Site;
+}
