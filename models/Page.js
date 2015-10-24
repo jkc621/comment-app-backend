@@ -15,4 +15,7 @@ var Page = sequelize.Define('Page', {
         },
         type: Sequelize.UUID
     }
-}, {})
+}, {
+    timestamps: true,
+    underscored: true
+})
