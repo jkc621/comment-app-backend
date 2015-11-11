@@ -1,16 +1,24 @@
 module.exports = function(sequelize, Datatypes){
     var Subscription = sequelize.define('Subscription', {
-        user_id: {
+        subscription_id: {
             allowNull: false,
+            defaultValue: sequelize.UUIDV1,
             primaryKey: true,
-            type: Datatypes.STRING(15)
+            type: Datatypes.UUID,
+            validate: {
+                isUUID: 1
+            }
         },
         site_id: {
             allowNull: false,
-            primaryKey: true,
             type: Datatypes.UUID
         }
     }, {
+        classMethods: {
+            associate: function(models){
+                Subscription.belongsTo(models.Profile, {foreignKey: 'profile_id'});
+            }
+        },
         timestamps: true,
         underscored: true
     });

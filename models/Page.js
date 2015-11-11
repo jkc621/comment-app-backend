@@ -7,12 +7,14 @@ module.exports = function(sequelize, Datatypes){
             validate: {
                 isUrl: true
             }
-        },
-        site_id: {
-            allowNull: false,
-            type: Datatypes.UUID
         }
     }, {
+        classMethods: {
+            associate: function(models){
+                Page.belongsTo(models.Site, {foreignKey: 'site_id', target_key: "site_id"});
+                Page.hasMany(models.Comment, {foreignKey: 'page_url'});
+            }
+        },
         timestamps: true,
         underscored: true
     });

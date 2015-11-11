@@ -21,6 +21,12 @@ module.exports = function(sequelize, Datatypes){
             type: Datatypes.STRING
         }
     }, {
+        classMethods: {
+            associate: function(models){
+                Site.hasMany(models.Subscription, {foreignKey: 'site_id', target_key: 'site_id'});
+                Site.hasMany(models.Page, {foreignKey: 'site_id'});
+            }
+        },
         timestamps: true,
         underscored: true
     });

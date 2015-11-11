@@ -12,6 +12,11 @@ module.exports = function(sequelize, Datatypes){
             }
         }
     }, {
+        classMethods: {
+            associate: function(models){
+                User.hasMany(models.Profile, {foreignKey: 'user_id'});
+            }
+        },
         timestamps: true,
         underscored: true
     });

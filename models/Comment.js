@@ -9,14 +9,6 @@ module.exports = function(sequelize, Datatypes){
                 isUUID: 1
             }
         },
-        parent_comment_id: {
-            allowNull: true,
-            defaultValue: null,
-            type: Datatypes.UUID,
-            validate:{
-                isUUID: 1
-            }
-        },
         comment_text: {
             allowNull: false,
             type: Datatypes.TEXT,
@@ -24,19 +16,15 @@ module.exports = function(sequelize, Datatypes){
                 notNull: true,
                 notEmpty: true
             }
-        },
-        page_url: {
-            allowNull: false,
-            type: Datatypes.STRING,
-            validate: {
-                isUrl: true
-            }
-        },
-        creator_id: {
-            allowNull: false,
-            type: Datatypes.STRING(15)
         }
     }, {
+        classMethods: {
+            associate: function(models) {
+                Comment.belongsTo(models.Comment, {foreignKey: 'parent_comment_id'});
+                Comment.belongsTo(models.Page, {foreignKey: 'page_url', target_key: 'url'});
+                Comment.belongsTo(models.Profile, {foreignKey: 'creator_id', target_key: 'user_id'});
+            }
+        },
         timestamps: true,
         underscored: true
     });
