@@ -2,7 +2,7 @@ module.exports = function(sequelize, Datatypes){
     var Comment = sequelize.define('Comment', {
         comment_id: {
             allowNull: false,
-            defaultValue: sequelize.UUIDV1,
+            defaultValue: Datatypes.UUIDV1,
             primaryKey: true,
             type: Datatypes.UUID,
             validate: {
