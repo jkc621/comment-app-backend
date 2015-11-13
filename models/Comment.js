@@ -4,16 +4,12 @@ module.exports = function(sequelize, Datatypes){
             allowNull: false,
             defaultValue: Datatypes.UUIDV1,
             primaryKey: true,
-            type: Datatypes.UUID,
-            validate: {
-                isUUID: 1
-            }
+            type: Datatypes.UUID
         },
         comment_text: {
             allowNull: false,
             type: Datatypes.TEXT,
             validate: {
-                notNull: true,
                 notEmpty: true
             }
         }
